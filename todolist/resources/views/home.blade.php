@@ -69,12 +69,16 @@
                                 </thead>
                             </thead>
                             <tbody>
+                            @foreach($incompleted as $incomplete)
                                 <tr>
-                                <th scope="row">This Is An Example</th>
-                                <td>Of How</td>
-                                <td>The Rows</td>
-                                <td>Will Look</td>
+                                <th scope="row">{{ $incomplete->task}}</th>
+                                <td>{{ $incomplete->priorityID }}</td>
+                                <td>{{ $incomplete->created_at }}</td>
+                                <td><div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+</div></td>
                                 </tr>
+                            @endforeach
                             </tbody>
                             </table>
                                 <!-- For each statement looping through incomplete tasks -->
@@ -90,12 +94,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                    <th scope="row">This Is An Example</th>
-                                    <td>Of How</td>
-                                    <td>The Rows</td>
-                                    <td>Will Look</td>
-                                    </tr>
+                                @foreach($completed as $complete)
+                                <tr>
+                                <th scope="row">{{ $complete->task}}</th>
+                                <td>{{ $complete->priorityID }}</td>
+                                <td>{{ $complete->created_at }}</td>
+                                <td><div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+</div></td>
+                                </tr>
+                            @endforeach
                                 </tbody>
                             </table>
                             <!-- For each statement looping through complete tasks -->

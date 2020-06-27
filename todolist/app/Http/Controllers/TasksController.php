@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Task;
+use Illuminate\Support\Facades\DB;
+
 class TasksController extends Controller
 {
     /**
@@ -13,7 +16,16 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+
+        $incomplete = DB::table('tasks')->where('completed', 0)->get();
+        $complete = DB::table('tasks')->where('completed', 1)->get();
+
+        return view('home', [
+            'incompleted' => $incomplete,
+            'completed' => $complete,
+
+        ]);
+        
     }
 
     /**
