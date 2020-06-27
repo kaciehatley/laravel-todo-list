@@ -5,7 +5,46 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header text-center"><h1>Tasks</h1></div>
+                <div class="card-header text-center">
+                    <h1>Tasks</h1>
+                <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info btn-danger btn-lg text-white" data-toggle="modal" data-target="#myModal">Create New Task</button>
+                </div>
+
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Create New Task</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="task">Task</label>
+                                        <input id="task" class="form-control" type="text" placeholder="Take A Walk...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="details">Task Details:</label>
+                                        <textarea class="form-control" rows="5" id="details"></textarea>
+                                    </div>
+                                    <select class="form-control">
+                                        <option>Important</option>
+                                        <option>Urgent</option>
+                                        <option>Ignore</option>
+                                        <option>Optional</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-danger mt-2">Add Task</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))
