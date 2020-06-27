@@ -16,9 +16,11 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $incomplete = DB::table('tasks')->join('priorities', 'tasks.priorityID', "=", 'priorities.id')->where('completed', 0)->get();
+        $complete = DB::table('tasks')->join('priorities', 'tasks.priorityID', "=", 'priorities.id')->where('completed', 1)->get();
 
-        $incomplete = DB::table('tasks')->where('completed', 0)->get();
-        $complete = DB::table('tasks')->where('completed', 1)->get();
+        // $incomplete = DB::table('tasks')->where('completed', 0)->get();
+        // $complete = DB::table('tasks')->where('completed', 1)->get();
 
         return view('home', [
             'incompleted' => $incomplete,
@@ -33,9 +35,18 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $tasks = new Task();
+        $tasks->task = $_POST['task'];
+        $tasks->userID = $_POST['details'];
+        $tasks->details = $_POST['details'];
+        $tasks->priorityID = $_POST['details'];
+        $tasks->completed = $_POST['details'];
+
+        $tasks->save();
+
+        return redirect('/');
     }
 
     /**
@@ -44,7 +55,7 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }

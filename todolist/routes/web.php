@@ -21,3 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/','TasksController@index');
+
+Route::post('/create','TasksController@create');
+
+Route::get('logout', 'Auth\LoginController@logout');

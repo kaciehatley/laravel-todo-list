@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-danger shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/') }}">
+                <a class="navbar-brand text-white">
                     To Do List
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -50,7 +50,7 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -77,4 +77,10 @@
         </main>
     </div>
 </body>
+<script>
+    function hello() {
+        console.log("hello");
+    }
+</script>
+<script src="https://use.fontawesome.com/65f9d13591.js"></script>
 </html>

@@ -18,9 +18,10 @@ class CreateTasksTable extends Migration
             $table->integer('userID');
             $table->string('task');
             $table->string('details');
-            $table->integer('priorityID');
             $table->boolean('completed');
             $table->timestamps();
+            $table->integer('priorityID');
+            $table->softDeletes('deleted_at', 0);
         });
     }
 
