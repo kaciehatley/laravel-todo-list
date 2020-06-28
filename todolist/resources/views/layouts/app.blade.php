@@ -89,6 +89,7 @@
     }
     $(document).ready(function() {
         var table = $('#datatable').DataTable();
+        var table1 = $('#dataTable1').DataTable();
 
         table.on('click', '.edit', function() {
             console.log("We Made it!")
@@ -103,9 +104,25 @@
             $('#updateTask').val(data[0]);
             $('#updateDetails').val(data[4]);
             $('#updatePriority').val(data[1]);
-            $('#updatePriority').val(data[1]);
             $('#createdOn').html('Created: '+data[2]);
             $('#updatedOn').html('Last Updated: '+data[5]);
+            
+        })
+
+        table1.on('click', '.edit1', function() {
+            $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')) {
+                $tr = $tr.prev('.parent');
+            }
+
+            var data = table1.row($tr).data();
+            console.log(data);
+
+            $('#updateIncTask').val(data[0]);
+            $('#updateIncDetails').val(data[4]);
+            $('#updateIncPriority').val(data[1]);
+            $('#incCreated').html('Created: '+data[2]);
+            $('#incUpdated').html('Last Updated: '+data[5]);
             
         })
     })
