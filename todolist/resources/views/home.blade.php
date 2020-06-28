@@ -11,10 +11,9 @@
                     <button type="button" class="btn btn-info btn-danger btn-lg text-white" data-toggle="modal" data-target="#myModal">Create New Task</button>
                 </div>
 
-                <!-- Modal -->
+                <!-- NEW TASK MODAL -->
                 <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-                        <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Create New Task</h4>
@@ -71,7 +70,6 @@
                             </thead>
                             <tbody>
                             @foreach($incompleted as $incomplete)
-                            <!-- EXPERIMENTING HERE -->
                             <tr>
                                 <th scope="row">{{ $incomplete->task}}</th>
                                 <td>{{ $incomplete->priority }}</td>
@@ -81,36 +79,37 @@
 </div></td>
                                 </tr>
                             @endforeach
-                            <!-- SECOND Modal -->
+                            <!-- COMPLETE TASK MODAL -->
                 <div id="taskInfo" class="modal fade" role="dialog">
                     <div class="modal-dialog">
-                        <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Task Title Here</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <form action="/create" method="post">
+                            <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
+                                <form action="/update" method="post" id="editForm">
+                                {{ method_field('PUT')}}
                                     <div class="form-group">
                                         <label for="task">Task</label>
-                                        <input id="task" class="form-control" type="text" name="task" placeholder="Take A Walk...">
+                                        <input id="updateTask" class="form-control" type="text" name="task" placeholder="Take A Walk...">
                                     </div>
                                     <div class="form-group">
                                         <label for="details">Task Details</label>
-                                        <textarea class="form-control" rows="5" name="details" id="details"></textarea>
+                                        <textarea class="form-control" rows="5" name="details" id="updateDetails"></textarea>
                                     </div>
                                     <label for="priority">Priority</label>
-                                    <select class="form-control">
+                                    <select class="form-control" id="updatePriority">
                                         <option>Important</option>
                                         <option>Urgent</option>
                                         <option>Ignore</option>
                                         <option>Optional</option>
                                     </select>
                                     {{ csrf_field() }}
-                                    <p class="mt-2">Created On: ...</p>
-                                    <p>Last Updated: ...</p>
-                                    <button type="submit" class="btn btn-dark"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
+                                    <p class="mt-2" id="createdOn"></p>
+                                    <p id="updatedOn"></p>
+                                    <button type="submit" class="btn btn-dark"><i class="fa fa-edit mr-1" aria-hidden="true"></i>Update Task</button>
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete Task</button>
                                 </form>
                             </div>
@@ -127,22 +126,26 @@
                             </div>
                             <div class="col-md-6">
                                 <h2 class="text-center">Complete</h2>
-                            <table class="table table-hover">
+                            <table id="datatable" class="table table-hover">
                                 <thead class="thead-dark">
                                     <th scope="col">Task</th>
                                     <th scope="col">Priority</th>
                                     <th scope="col">Created</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col" class="d-none">Details</th>
+                                    <th scope="col" class="d-none">Updated_At</th>
                                 </thead>
                                 <tbody>
                                 @foreach($completed as $complete)
-                                <tr value="{{$complete->id}}" data-toggle="modal" data-target="#taskInfo" onclick="hello()">
+                                <tr class="edit" data-toggle="modal" data-target="#taskInfo" onclick="hello({{$complete->id}})">
                                 <th scope="row">{{ $complete->task}}</th>
                                 <td>{{ $complete->priority }}</td>
                                 <td>{{ \Carbon\Carbon::parse($complete->created_at)->diffForHumans() }}</td>
                                 <td><div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-</div></td>
+                                    <input class="form-check-input" type="checkbox" value=1 id="defaultCheck1" checked>
+                                </div></td>
+<td class="d-none">{{ $complete->details }}</td>
+<td class="d-none">{{ \Carbon\Carbon::parse($complete->updated_at)->diffForHumans() }}</td>
                                 </tr>
                             @endforeach
                                 </tbody>

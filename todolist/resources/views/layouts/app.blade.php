@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-danger shadow-sm">
@@ -77,10 +77,38 @@
         </main>
     </div>
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" defer></script>
 <script>
-    function hello() {
-        console.log("hello");
+    function hello(id) {
+        console.log(id);
     }
+    $(document).ready(function() {
+        var table = $('#datatable').DataTable();
+
+        table.on('click', '.edit', function() {
+            console.log("We Made it!")
+            $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')) {
+                $tr = $tr.prev('.parent');
+            }
+
+            var data = table.row($tr).data();
+            console.log(data);
+
+            $('#updateTask').val(data[0]);
+            $('#updateDetails').val(data[4]);
+            $('#updatePriority').val(data[1]);
+            $('#updatePriority').val(data[1]);
+            $('#createdOn').html('Created: '+data[2]);
+            $('#updatedOn').html('Last Updated: '+data[5]);
+            
+        })
+    })
 </script>
 <script src="https://use.fontawesome.com/65f9d13591.js"></script>
 </html>

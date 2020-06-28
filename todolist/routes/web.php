@@ -23,5 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/','TasksController@index');
 
 Route::post('/create','TasksController@create');
+Route::resource('/update','TasksController@update');
 
 Route::get('logout', 'Auth\LoginController@logout');
