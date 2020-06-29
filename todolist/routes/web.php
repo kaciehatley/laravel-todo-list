@@ -27,5 +27,6 @@ Route::patch('update', 'TasksController@update')->name('update');
 Route::patch('markComplete', 'TasksController@markComplete')->name('markComplete');
 Route::patch('markIncomplete', 'TasksController@markIncomplete')->name('markIncomplete');
 
+Route::delete('/delete','TasksController@delete');
 
 Route::get('logout', 'Auth\LoginController@logout');

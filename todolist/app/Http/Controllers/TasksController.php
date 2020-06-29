@@ -21,11 +21,13 @@ class TasksController extends Controller
         $incomplete = DB::table('tasks')
         ->join('priorities', 'tasks.priorityID', "=", 'priorities.priorityID')
         ->where('completed', 0)
+        ->where('deleted_at', NULL)
         ->where('userID', $id)
         ->get();
         $complete = DB::table('tasks')
         ->join('priorities', 'tasks.priorityID', "=", 'priorities.priorityID')
         ->where('completed', 1)
+        ->where('deleted_at', NULL)
         ->where('userID', $id)
         ->get();
         // $incomplete = DB::table('tasks')->where('completed', 0)->get();
@@ -130,6 +132,15 @@ class TasksController extends Controller
         $tasks->details = $request->get('incompleteDetails');
 
         $tasks->save();
+
+        return redirect('/');
+
+    }
+
+    public function delete(Request $request)
+    {
+
+        $tasks=Task::findOrFail($request->deleteIncID)->delete();
 
         return redirect('/');
 

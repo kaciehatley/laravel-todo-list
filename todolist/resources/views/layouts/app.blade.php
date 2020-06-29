@@ -157,9 +157,11 @@
             $('#updateTaskID').html(data[6]);
             $('#task_ID').val(data[6]);
             $('#completeTask_ID').val(data[6]);
+            $('#deleteIncID').val(data[6]);
 
             $('#completeForm').attr('action', '/markComplete/', data[6]);
             $('#updateIncForm').attr('action', '/update/', data[6]);
+            $('#deleteInc').attr('action', '/delete/', data[6]);
             $('#incompleteInfo').modal('show');
 
         })

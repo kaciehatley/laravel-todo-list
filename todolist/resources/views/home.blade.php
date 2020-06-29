@@ -163,9 +163,14 @@
                                     <p class="mt-2" id="incCreated"></p>
                                     <p id="incUpdated"></p>
                                     <p id="updateTaskID" class="d-none"></p>
-                                    <button type="submit" class="btn btn-dark"><i class="fa fa-edit mr-1" aria-hidden="true"></i>Update Task</button>
-                                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete Task</button>
+                                    <button type="submit" class="btn btn-dark"><i class="fa fa-save mr-1" aria-hidden="true"></i>Update Task</button>
                                 </form>
+                                <form method="post" id="deleteInc">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE')}}
+                                <input name="deleteIncID" type="hidden" id="deleteIncID" value="">
+                                <button type="submit" class="btn btn-danger mt-3"><i class="fa fa-trash mr-1" aria-hidden="true"></i>Delete Task</button>
+                            </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
