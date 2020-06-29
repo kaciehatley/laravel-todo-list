@@ -87,9 +87,11 @@
     function hello(id) {
         console.log(id);
     }
+
     $(document).ready(function() {
         var table = $('#datatable').DataTable();
         var table1 = $('#dataTable1').DataTable();
+        var checkbox=$('.checkBox');
         
         var completeBtn = $('#markAsComplete');
         var taskID = table1.data('taskID')
@@ -98,6 +100,18 @@
         //     console.log("I hear you!");
         //     $('#updateIncForm').attr('action', '/markComplete/', data[6]);
         //     $('#incompleteInfo').modal('show');
+        // })
+
+        // checkbox.on('click', function() {
+        //     console.log("heyyyy");
+        //     $tr = $(this).closest('tr');
+        //     if($($tr).hasClass('child')) {
+        //         $tr = $tr.prev('.parent');
+        //     }
+
+        //     var data = checkbox.row($tr).data();
+        //     console.log("data:");
+        //     console.log(data[0]);
         // })
 
         table.on('click', '.edit', function() {
@@ -111,10 +125,14 @@
             console.log(data);
 
             $('#updateTask').val(data[0]);
+            $('#comTaskHeader').html(data[0]);
             $('#updateDetails').val(data[4]);
             $('#updatePriority').val(data[1]);
+            $('#completedTask_ID').val(data[6]);
             $('#createdOn').html('Created: '+data[2]);
             $('#updatedOn').html('Last Updated: '+data[5]);
+
+            $('#returnIncomplete').attr('action', '/markIncomplete/', data[6]);
             
             // $('editForm').attr('action', '/updatetask/'+data[0])
         })
@@ -130,6 +148,7 @@
             // console.log('taskID:'+taskID);
 
             $('#updateIncTask').val(data[0]);
+            $('#incTaskHeader').html(data[0]);
             $('#updateIncDetails').val(data[4]);
             $('#updateIncPriority').val(data[1]);
             $('#updateIncPriority').val(data[1]);

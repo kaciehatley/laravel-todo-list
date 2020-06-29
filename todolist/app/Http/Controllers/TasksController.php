@@ -68,6 +68,17 @@ class TasksController extends Controller
         return redirect('/');
     }
 
+    public function markIncomplete(Request $request)
+    {
+        //
+        $tasks = Task::findOrFail($request->completedTask_ID);
+        $tasks->completed = '0';
+
+        $tasks->save();
+
+        return redirect('/');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

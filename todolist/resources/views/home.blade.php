@@ -130,7 +130,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Task Title Here</h4>
+                                <h4 class="modal-title" id="incTaskHeader"></h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
@@ -181,10 +181,16 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Task Title Here</h4>
+                                <h4 class="modal-title" id="comTaskHeader"></h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
+                            <form method="post" id="returnIncomplete">
+                            {{ csrf_field() }}
+                            {{ method_field('patch')}}
+                                <input name="completedTask_ID" type="hidden" id="completedTask_ID" value="">
+                                <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-arrow-left mr-1" aria-hidden="true"></i>Return To Incomplete</button>
+                            </form>
                                 <form action="/updatetask" method="post" id="editForm">
                                 {{ method_field('PUT')}}
                                     <div class="form-group">
