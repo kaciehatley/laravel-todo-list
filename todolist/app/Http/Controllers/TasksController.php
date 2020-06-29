@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
@@ -16,9 +17,17 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $incomplete = DB::table('tasks')->join('priorities', 'tasks.priorityID', "=", 'priorities.id')->where('completed', 0)->get();
-        $complete = DB::table('tasks')->join('priorities', 'tasks.priorityID', "=", 'priorities.id')->where('completed', 1)->get();
-
+        $id = \Auth::user()->id;
+        $incomplete = DB::table('tasks')
+        ->join('priorities', 'tasks.priorityID', "=", 'priorities.id')
+        ->where('completed', 0)
+        ->where('userID', $id)
+        ->get();
+        $complete = DB::table('tasks')
+        ->join('priorities', 'tasks.priorityID', "=", 'priorities.id')
+        ->where('completed', 1)
+        ->where('userID', $id)
+        ->get();
         // $incomplete = DB::table('tasks')->where('completed', 0)->get();
         // $complete = DB::table('tasks')->where('completed', 1)->get();
 
