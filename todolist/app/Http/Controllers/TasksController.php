@@ -79,7 +79,6 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -89,9 +88,19 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // $this->validate($request, [
+        //     'task'=>'required'
+        // ]);
+        $tasks = Task::findOrFail($request->task_ID);
+        $tasks->task = $request->get('incompleteTask');
+        $tasks->details = $request->get('incompleteDetails');
+
+        $tasks->save();
+
+        return redirect('/');
+
     }
 
     /**

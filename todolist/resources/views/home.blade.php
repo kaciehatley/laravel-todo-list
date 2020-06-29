@@ -29,11 +29,12 @@
                                 <th scope="col">Created</th>
                                 <th scope="col">Status</th>
                                 <th scope="col" class="d-none">Details</th>
-                                    <th scope="col" class="d-none">Updated_At</th>
+                                <th scope="col" class="d-none">Updated_At</th>
+                                <th scope="col" class="d-none">Task ID</th>
                                 </thead>
                             <tbody>
                             @foreach($incompleted as $incomplete)
-                            <tr class="edit1" data-toggle="modal" data-target="#incompleteInfo">
+                            <tr class="edit1" data-toggle="modal" data-target="#incompleteInfo" data-taskID={{$incomplete->id}}>
                                 <th scope="row">{{ $incomplete->task}}</th>
                                 <td>{{ $incomplete->priority }}</td>
                                 <td>{{ \Carbon\Carbon::parse($incomplete->created_at)->diffForHumans() }}</td>
@@ -42,6 +43,7 @@
 </div></td>
 <td class="d-none">{{ $incomplete->details }}</td>
 <td class="d-none">{{ \Carbon\Carbon::parse($incomplete->updated_at)->diffForHumans() }}</td>
+<td class="d-none">{{ $incomplete->id }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -58,10 +60,11 @@
                                     <th scope="col">Status</th>
                                     <th scope="col" class="d-none">Details</th>
                                     <th scope="col" class="d-none">Updated_At</th>
+                                    <th scope="col" class="d-none">Task ID</th>
                                 </thead>
                                 <tbody>
                                 @foreach($completed as $complete)
-                                <tr class="edit" data-toggle="modal" data-target="#taskInfo" onclick="hello({{$complete->id}})">
+                                <tr class="edit" data-toggle="modal" data-target="#taskInfo">
                                 <th scope="row">{{ $complete->task}}</th>
                                 <td>{{ $complete->priority }}</td>
                                 <td>{{ \Carbon\Carbon::parse($complete->created_at)->diffForHumans() }}</td>
@@ -70,6 +73,7 @@
                                 </div></td>
 <td class="d-none">{{ $complete->details }}</td>
 <td class="d-none">{{ \Carbon\Carbon::parse($complete->updated_at)->diffForHumans() }}</td>
+<td class="d-none">{{ $complete->id }}</td>
                                 </tr>
                             @endforeach
                                 </tbody>
@@ -131,15 +135,18 @@
                             </div>
                             <div class="modal-body">
                             <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
-                                <form action="/update" method="post" id="updateIncForm">
-                                {{ method_field('PUT')}}
+                                
+                                <form method="post" id="updateIncForm">
+                                {{ csrf_field() }}
+                                {{ method_field('patch')}}
+                                <input name="task_ID" type="hidden" id="task_ID" value="">
                                     <div class="form-group">
                                         <label for="task">Task</label>
-                                        <input id="updateIncTask" class="form-control" type="text" name="task" placeholder="Take A Walk...">
+                                        <input id="updateIncTask" class="form-control" type="text" name="incompleteTask" placeholder="Take A Walk...">
                                     </div>
                                     <div class="form-group">
                                         <label for="details">Task Details</label>
-                                        <textarea class="form-control" rows="5" name="details" id="updateIncDetails"></textarea>
+                                        <textarea class="form-control" rows="5" name="incompleteDetails" id="updateIncDetails"></textarea>
                                     </div>
                                     <label for="priority">Priority</label>
                                     <select class="form-control" id="updateIncPriority">
@@ -148,9 +155,9 @@
                                         <option>Ignore</option>
                                         <option>Optional</option>
                                     </select>
-                                    {{ csrf_field() }}
                                     <p class="mt-2" id="incCreated"></p>
                                     <p id="incUpdated"></p>
+                                    <p id="updateTaskID" class="d-none"></p>
                                     <button type="submit" class="btn btn-dark"><i class="fa fa-edit mr-1" aria-hidden="true"></i>Update Task</button>
                                     <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Delete Task</button>
                                 </form>
@@ -174,7 +181,7 @@
                             </div>
                             <div class="modal-body">
                             <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
-                                <form action="/update" method="post" id="editForm">
+                                <form action="/updatetask" method="post" id="editForm">
                                 {{ method_field('PUT')}}
                                     <div class="form-group">
                                         <label for="task">Task</label>

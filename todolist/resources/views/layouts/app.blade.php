@@ -91,6 +91,8 @@
         var table = $('#datatable').DataTable();
         var table1 = $('#dataTable1').DataTable();
 
+        var taskID = table1.data('taskID')
+
         table.on('click', '.edit', function() {
             console.log("We Made it!")
             $tr = $(this).closest('tr');
@@ -107,6 +109,7 @@
             $('#createdOn').html('Created: '+data[2]);
             $('#updatedOn').html('Last Updated: '+data[5]);
             
+            // $('editForm').attr('action', '/updatetask/'+data[0])
         })
 
         table1.on('click', '.edit1', function() {
@@ -117,13 +120,20 @@
 
             var data = table1.row($tr).data();
             console.log(data);
+            // console.log('taskID:'+taskID);
 
             $('#updateIncTask').val(data[0]);
             $('#updateIncDetails').val(data[4]);
             $('#updateIncPriority').val(data[1]);
+            $('#updateIncPriority').val(data[1]);
             $('#incCreated').html('Created: '+data[2]);
             $('#incUpdated').html('Last Updated: '+data[5]);
-            
+            $('#updateTaskID').html(data[6]);
+            $('#task_ID').val(data[6]);
+
+            $('#updateIncForm').attr('action', '/update/', data[6]);
+            $('#incompleteInfo').modal('show');
+
         })
     })
 </script>

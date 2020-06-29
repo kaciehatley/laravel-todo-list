@@ -20,9 +20,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/','TasksController@index');
 
+Route::get('/','TasksController@index');
 Route::post('/create','TasksController@create');
-Route::resource('/update','TasksController@update');
+Route::patch('update', 'TasksController@update')->name('update');
+
 
 Route::get('logout', 'Auth\LoginController@logout');
