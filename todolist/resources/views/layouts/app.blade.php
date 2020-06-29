@@ -90,8 +90,15 @@
     $(document).ready(function() {
         var table = $('#datatable').DataTable();
         var table1 = $('#dataTable1').DataTable();
-
+        
+        var completeBtn = $('#markAsComplete');
         var taskID = table1.data('taskID')
+
+        // completeBtn.on('click', function() {
+        //     console.log("I hear you!");
+        //     $('#updateIncForm').attr('action', '/markComplete/', data[6]);
+        //     $('#incompleteInfo').modal('show');
+        // })
 
         table.on('click', '.edit', function() {
             console.log("We Made it!")
@@ -130,7 +137,9 @@
             $('#incUpdated').html('Last Updated: '+data[5]);
             $('#updateTaskID').html(data[6]);
             $('#task_ID').val(data[6]);
+            $('#completeTask_ID').val(data[6]);
 
+            $('#completeForm').attr('action', '/markComplete/', data[6]);
             $('#updateIncForm').attr('action', '/update/', data[6]);
             $('#incompleteInfo').modal('show');
 

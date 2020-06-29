@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/','TasksController@index');
 Route::post('/create','TasksController@create');
 Route::patch('update', 'TasksController@update')->name('update');
+Route::patch('markComplete', 'TasksController@markComplete')->name('markComplete');
 
 
 Route::get('logout', 'Auth\LoginController@logout');

@@ -134,7 +134,12 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                            <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
+                            <form method="post" id="completeForm">
+                            {{ csrf_field() }}
+                            {{ method_field('patch')}}
+                                <input name="completeTask_ID" type="hidden" id="completeTask_ID" value="">
+                                <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
+                            </form>
                                 
                                 <form method="post" id="updateIncForm">
                                 {{ csrf_field() }}
@@ -180,7 +185,6 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                            <button type="submit" class="btn btn-dark mb-3"><i class="fa fa-check mr-1" aria-hidden="true"></i>Mark As Complete</button>
                                 <form action="/updatetask" method="post" id="editForm">
                                 {{ method_field('PUT')}}
                                     <div class="form-group">
