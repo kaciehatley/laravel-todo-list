@@ -108,11 +108,11 @@
                                         <label for="details">Task Details:</label>
                                         <textarea class="form-control" rows="5" name="details" id="details"></textarea>
                                     </div>
-                                    <select class="form-control">
-                                        <option>Important</option>
-                                        <option>Urgent</option>
-                                        <option>Ignore</option>
-                                        <option>Optional</option>
+                                    <select name="priority" class="form-control">
+                                        <option value=2>Important</option>
+                                        <option value=1>Urgent</option>
+                                        <option value=3>Ignore</option>
+                                        <option value=4>Optional</option>
                                     </select>
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-danger mt-3">Add Task</button>

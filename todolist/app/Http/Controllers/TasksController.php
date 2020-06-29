@@ -19,12 +19,12 @@ class TasksController extends Controller
     {
         $id = \Auth::user()->id;
         $incomplete = DB::table('tasks')
-        ->join('priorities', 'tasks.priorityID', "=", 'priorities.id')
+        ->join('priorities', 'tasks.priorityID', "=", 'priorities.priorityID')
         ->where('completed', 0)
         ->where('userID', $id)
         ->get();
         $complete = DB::table('tasks')
-        ->join('priorities', 'tasks.priorityID', "=", 'priorities.id')
+        ->join('priorities', 'tasks.priorityID', "=", 'priorities.priorityID')
         ->where('completed', 1)
         ->where('userID', $id)
         ->get();
@@ -46,12 +46,14 @@ class TasksController extends Controller
      */
     public function create(Request $request)
     {
+        $id = \Auth::user()->id;
+        
         $tasks = new Task();
         $tasks->task = $_POST['task'];
-        $tasks->userID = $_POST['details'];
+        $tasks->userID = $id;
         $tasks->details = $_POST['details'];
-        $tasks->priorityID = $_POST['details'];
-        $tasks->completed = $_POST['details'];
+        $tasks->priorityID = $_POST['priority'];
+        $tasks->completed = 0;
 
         $tasks->save();
 
@@ -61,7 +63,7 @@ class TasksController extends Controller
     {
         //
         $tasks = Task::findOrFail($request->completeTask_ID);
-        $tasks->completed = '1';
+        $tasks->completed = 1;
 
         $tasks->save();
 
@@ -72,7 +74,7 @@ class TasksController extends Controller
     {
         //
         $tasks = Task::findOrFail($request->completedTask_ID);
-        $tasks->completed = '0';
+        $tasks->completed = 0;
 
         $tasks->save();
 
