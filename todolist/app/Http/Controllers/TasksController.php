@@ -30,12 +30,18 @@ class TasksController extends Controller
         ->where('deleted_at', NULL)
         ->where('userID', $id)
         ->get();
+        $deleted = DB::table('tasks')
+        ->join('priorities', 'tasks.priorityID', "=", 'priorities.priorityID')
+        ->whereNotNull('deleted_at')
+        ->where('userID', $id)
+        ->get();
         // $incomplete = DB::table('tasks')->where('completed', 0)->get();
         // $complete = DB::table('tasks')->where('completed', 1)->get();
 
         return view('home', [
             'incompleted' => $incomplete,
             'completed' => $complete,
+            'deletedTasks' => $deleted,
 
         ]);
         

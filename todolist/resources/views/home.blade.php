@@ -88,6 +88,7 @@
             </div>
         </div>
     </div>
+    <button type="button" class="btn btn-info btn-danger btn-lg text-white fixed-bottom mb-3 ml-3" data-toggle="modal" data-target="#deletedModal"><i class="fa fa-trash" aria-hidden="true"></i></button>
 </div>
 
                 <!-- NEW TASK MODAL -->
@@ -227,5 +228,41 @@
                     </div>
                 </div>
                 <!-- End modal -->
+
+                <!-- Deleted Modal -->
+                <div id="deletedModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Deleted Tasks</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                            <table id="deletedTable" class="table table-hover">
+                                <thead class="thead-dark">
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Created</th>
+                                    <th scope="col">Deleted</th>
+                                    <th scope="col"></th>
+                                    <th scope="col" hidden>Task ID</th>
+                                </thead>
+                                <tbody>
+                                @foreach($deletedTasks as $delete)
+                                <tr>
+                                <th scope="row">{{ $delete->task}}</th>
+                                <td>{{ \Carbon\Carbon::parse($delete->created_at)->diffForHumans() }}</td>
+                                <td>{{ \Carbon\Carbon::parse($delete->deleted_at)->diffForHumans() }}</td>
+                                <td><button type="button" class="btn btn-info btn-dark btn text-white">Restore</button></td>
+                                </tr>
+                            @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 @endsection

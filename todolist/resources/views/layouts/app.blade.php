@@ -91,6 +91,7 @@
     $(document).ready(function() {
         var table = $('#datatable').DataTable();
         var table1 = $('#dataTable1').DataTable();
+        var deletedTable = $('#deletedTable').DataTable();
         var checkbox=$('.checkBox');
         
         var completeBtn = $('#markAsComplete');
@@ -165,6 +166,7 @@
             $('#incompleteInfo').modal('show');
 
         })
+
     })
 </script>
 <script src="https://use.fontawesome.com/65f9d13591.js"></script>
