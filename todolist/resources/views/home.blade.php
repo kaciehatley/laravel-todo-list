@@ -244,7 +244,6 @@
                                     <th scope="col">Created</th>
                                     <th scope="col">Deleted</th>
                                     <th scope="col"></th>
-                                    <th scope="col" hidden>Task ID</th>
                                 </thead>
                                 <tbody>
                                 @foreach($deletedTasks as $delete)
