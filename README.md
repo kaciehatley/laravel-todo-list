@@ -1,12 +1,20 @@
 # Laravel To Do List Application
 
-## About
+## Contents
+* [About](#about)
+* [Installation](#installation)
+* [Heroku](#heroku)
+* [Issues](#issues)
+* [Next Steps](#steps)
+* [Architecture](#architecture)
+
+## About<a name="about"></a>
 
 The Laravel To-Do List application, allows the user to manage tasks by creating to-do list items, sort or search through their list, update tasks, and delete tasks. 
 
 Built on the Laravel Framework 7.0.
 
-## Installation
+## Installation<a name="installation"></a>
 
 ### Built With
 
@@ -87,7 +95,7 @@ php artisan serve
 
 The application should be running on `http://localhost:8000`.
 
-## Run in Heroku
+## Run in Heroku<a name="heroku"></a>
 [Run Application In Heroku](https://rocky-dawn-97966.herokuapp.com/)
 
 ### Register User
@@ -99,7 +107,7 @@ The application should be running on `http://localhost:8000`.
 ### Sort, Update, and Delete Tasks (Coming Soon To Deployed Site)
 ![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/55072295/86361392-c3143900-bc41-11ea-8325-fc1468930fc9.gif)
 
-## Current Issues
+## Current Issues<a name="issues"></a>
 
 ### HTTP Methods In Heroku
 
@@ -117,7 +125,7 @@ When running the application deployed on Heroku, HTTP GET and POST methods work 
 * Due to the dynamic nature of the update task modal, the action attributes are set dynamically using jQuery. Will try again by defining action inine.
 * Some forums have suggested this to be a common framework issue.
 
-## Next Steps
+## Next Steps <a name="steps"></a>
 
 * User can select multiple priorities
 * User can create custom priorities
@@ -125,7 +133,7 @@ When running the application deployed on Heroku, HTTP GET and POST methods work 
 * Add validations for form entries
 * User can set reminders
 
-## Architecture
+## Architecture <a name="architecture"></a>
 
 ### Database
 ![laravel to do](https://user-images.githubusercontent.com/55072295/86364912-cd850180-bc46-11ea-9576-71af46ed8a31.png)
