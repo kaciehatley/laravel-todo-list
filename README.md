@@ -87,6 +87,16 @@ php artisan serve
 
 The application should be running on `http://localhost:8000`.
 
-## How to run in Heroku
+## Run in Heroku
+
+### Register User
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/55072295/86360589-97dd1a00-bc40-11ea-8101-449c76fcec0a.gif)
+
+### Create Tasks
+![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/55072295/86360825-eab6d180-bc40-11ea-88da-dd2ec62d3bc9.gif)
+
+### Sort, Update, and Delete Tasks (Coming Soon To Deployed Site)
+![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/55072295/86360946-1a65d980-bc41-11ea-97f0-8c5079c80127.gif)
+
 ## Next Steps/Current Issues
 ## Architecture
