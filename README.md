@@ -88,6 +88,7 @@ php artisan serve
 The application should be running on `http://localhost:8000`.
 
 ## Run in Heroku
+[Run Application In Heroku](https://rocky-dawn-97966.herokuapp.com/)
 
 ### Register User
 ![ezgif com-video-to-gif](https://user-images.githubusercontent.com/55072295/86360589-97dd1a00-bc40-11ea-8101-449c76fcec0a.gif)
@@ -125,3 +126,12 @@ When running the application deployed on Heroku, HTTP GET and POST methods work 
 * User can set reminders
 
 ## Architecture
+
+### Database
+![laravel to do](https://user-images.githubusercontent.com/55072295/86364912-cd850180-bc46-11ea-9576-71af46ed8a31.png)
+
+The database is comprised of three tables: users, tasks, and priorities.
+
+* The Laravel UI is the scaffolding for the users table and all login/register/logout functionality.
+* The tasks table uses basic column types to record the id, userID (linked to primary key on users table), task name, task details, completed boolean value, priority id (linked to primary key on priorities table), crested_at and updated_at timestamps, as well as Laravel's softDeletes.
+* The priorities table contains a list of priorty types and their associated id. All priorities are created with seeds.
