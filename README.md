@@ -96,7 +96,32 @@ The application should be running on `http://localhost:8000`.
 ![ezgif com-video-to-gif (1)](https://user-images.githubusercontent.com/55072295/86360825-eab6d180-bc40-11ea-88da-dd2ec62d3bc9.gif)
 
 ### Sort, Update, and Delete Tasks (Coming Soon To Deployed Site)
-![ezgif com-video-to-gif (2)](https://user-images.githubusercontent.com/55072295/86360946-1a65d980-bc41-11ea-97f0-8c5079c80127.gif)
+![ezgif com-video-to-gif (3)](https://user-images.githubusercontent.com/55072295/86361392-c3143900-bc41-11ea-8325-fc1468930fc9.gif)
 
-## Next Steps/Current Issues
+## Current Issues
+
+### HTTP Methods In Heroku
+
+#### Issue
+
+When running the application deployed on Heroku, HTTP GET and POST methods work seamlessly. However, though all methods work locally, all actions requiring a PATCH method return an error stating: `The GET method is not supported for this route. Supported methods: PATCH.`
+
+#### Troubleshooting
+
+* Added formmethod with POST to button to reinforce method.
+* Added formaction to button to reinforce action.
+
+#### Potential Solution
+
+* Due to the dynamic nature of the update task modal, the action attributes are set dynamically using jQuery. Will try again by defining action inine.
+* Some forums have suggested this to be a common framework issue.
+
+## Next Steps
+
+* User can select multiple priorities
+* User can create custom priorities
+* Add functionality to "Restore" button in deleted folder
+* Add validations for form entries
+* User can set reminders
+
 ## Architecture
