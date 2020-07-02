@@ -136,7 +136,7 @@ When running the application deployed on Heroku, HTTP GET and POST methods work 
 ## Architecture <a name="architecture"></a>
 
 ### Database
-![laravel to do](https://user-images.githubusercontent.com/55072295/86364912-cd850180-bc46-11ea-9576-71af46ed8a31.png)
+![laravel to do (1)](https://user-images.githubusercontent.com/55072295/86366469-d2e34b80-bc48-11ea-8d9f-f0f5ed66c0b9.png)
 
 The database is comprised of three tables: users, tasks, and priorities.
 
