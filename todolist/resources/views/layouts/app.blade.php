@@ -10,13 +10,18 @@
     <title>To Do List</title>
 
     <!-- Scripts -->
+    <!-- <script src="{{ secure_asset('js/app.js') }}" defer></script> -->
+    <!-- Local Script Link -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Light_green_check.svg/1024px-Light_green_check.svg.png">
 
     <!-- Styles -->
+    <!-- <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- Local Style Link -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 <body>
@@ -77,34 +82,93 @@
         </main>
     </div>
 </body>
+<!-- jQuery Script -->
 <script
   src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
   integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
   crossorigin="anonymous"></script>
+  <!-- Data tables scripts -->
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" defer></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js" defer></script>
 <script>
-    function hello(id) {
-        console.log(id);
-    }
 
     $(document).ready(function() {
-        var table = $('#datatable').DataTable();
-        var table1 = $('#dataTable1').DataTable();
+        // Running DataTables to allow sort and search of tables
+        var compTaskTable = $('#datatable').DataTable();
+        var incompTaskTable = $('#dataTable1').DataTable();
         var deletedTable = $('#deletedTable').DataTable();
-        var checkbox=$('.checkBox');
-        
-        var completeBtn = $('#markAsComplete');
-        var taskID = table1.data('taskID')
+      
+        // When user clicks on row, task data is pulled and rendered in modal
+        incompTaskTable.on('click', '.edit1', function() {
+            $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')) {
+                $tr = $tr.prev('.parent');
+            }
+
+            // Storing current selected task's data
+            var data = incompTaskTable.row($tr).data();
+
+            // Task name
+            $('#updateIncTask').val(data[0]);
+            $('#incTaskHeader').html(data[0]);
+            // Task Details
+            $('#updateIncDetails').val(data[4]);
+            // Task Priority
+            $('#updateIncPriority').val(data[1]);
+            // Timestamps
+            $('#incCreated').html('Created: '+data[2]);
+            $('#incUpdated').html('Last Updated: '+data[5]);
+            // Task ID
+            $('#updateTaskID').html(data[6]);
+            $('#task_ID').val(data[6]);
+            $('#completeTask_ID').val(data[6]);
+            $('#deleteIncID').val(data[6]);
+
+            // Sets the action of forms in incomplete tasks modal
+            $('#completeForm').attr('action', '/markComplete/', data[6]);
+            $('#updateIncForm').attr('action', '/update/', data[6]);
+            $('#deleteInc').attr('action', '/delete/', data[6]);
+        })
+
+        compTaskTable.on('click', '.edit', function() {
+            $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')) {
+                $tr = $tr.prev('.parent');
+            }
+
+            // Storing current selected task's data
+            var data = compTaskTable.row($tr).data();
+
+            // Task name
+            $('#updateTask').val(data[0]);
+            $('#comTaskHeader').html(data[0]);
+            // Task Details
+            $('#updateDetails').val(data[4]);
+            // Task Priority
+            $('#updatePriority').val(data[1]);
+            // Task ID
+            $('#completedTask_ID').val(data[6]);
+            // Timestamps
+            $('#createdOn').html('Created: '+data[2]);
+            $('#updatedOn').html('Last Updated: '+data[5]);
+
+            // Sets the action of form containing "Return To Incomplete" button
+            $('#returnIncomplete').attr('action', '/markIncomplete/', data[6]);
+            
+        })
+
+        // STILL IN PRODUCTION
+
+        // var checkbox=$('.checkBox');    
+        // var completeBtn = $('#markAsComplete');
+        // var taskID = incompTaskTable.data('taskID')
 
         // completeBtn.on('click', function() {
-        //     console.log("I hear you!");
         //     $('#updateIncForm').attr('action', '/markComplete/', data[6]);
         //     $('#incompleteInfo').modal('show');
         // })
 
         // checkbox.on('click', function() {
-        //     console.log("heyyyy");
         //     $tr = $(this).closest('tr');
         //     if($($tr).hasClass('child')) {
         //         $tr = $tr.prev('.parent');
@@ -114,58 +178,6 @@
         //     console.log("data:");
         //     console.log(data[0]);
         // })
-
-        table.on('click', '.edit', function() {
-            console.log("We Made it!")
-            $tr = $(this).closest('tr');
-            if($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-
-            var data = table.row($tr).data();
-            console.log(data);
-
-            $('#updateTask').val(data[0]);
-            $('#comTaskHeader').html(data[0]);
-            $('#updateDetails').val(data[4]);
-            $('#updatePriority').val(data[1]);
-            $('#completedTask_ID').val(data[6]);
-            $('#createdOn').html('Created: '+data[2]);
-            $('#updatedOn').html('Last Updated: '+data[5]);
-
-            $('#returnIncomplete').attr('action', '/markIncomplete/', data[6]);
-            
-            // $('editForm').attr('action', '/updatetask/'+data[0])
-        })
-
-        table1.on('click', '.edit1', function() {
-            $tr = $(this).closest('tr');
-            if($($tr).hasClass('child')) {
-                $tr = $tr.prev('.parent');
-            }
-
-            var data = table1.row($tr).data();
-            console.log(data);
-            // console.log('taskID:'+taskID);
-
-            $('#updateIncTask').val(data[0]);
-            $('#incTaskHeader').html(data[0]);
-            $('#updateIncDetails').val(data[4]);
-            $('#updateIncPriority').val(data[1]);
-            $('#updateIncPriority').val(data[1]);
-            $('#incCreated').html('Created: '+data[2]);
-            $('#incUpdated').html('Last Updated: '+data[5]);
-            $('#updateTaskID').html(data[6]);
-            $('#task_ID').val(data[6]);
-            $('#completeTask_ID').val(data[6]);
-            $('#deleteIncID').val(data[6]);
-
-            $('#completeForm').attr('action', '/markComplete/', data[6]);
-            $('#updateIncForm').attr('action', '/update/', data[6]);
-            $('#deleteInc').attr('action', '/delete/', data[6]);
-            $('#incompleteInfo').modal('show');
-
-        })
 
     })
 </script>
