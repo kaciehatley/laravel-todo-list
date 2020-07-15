@@ -15,6 +15,9 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // GENERATES DATA WHICH POPULATES INCOMPLETE ND COMPLETE TASKS TABLES
+
     public function index()
     {
         $id = \Auth::user()->id;
@@ -52,6 +55,9 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     // CRESTES NEW TASK
+
     public function create(Request $request)
     {
         $id = \Auth::user()->id;
@@ -67,6 +73,27 @@ class TasksController extends Controller
 
         return redirect('/');
     }
+
+    // UPDATES COMPLETION STATUS ON CLICK OF CHECKBOX
+
+    public function checkToComplete(Request $request)
+        {   
+            $completedStatus = $request->completed;
+            $tasks = Task::findOrFail($request->id);
+            //
+            if($completedStatus==1) {
+                $tasks->completed = 0;
+                $tasks->save();
+            }
+            else if ($completedStatus==0) {
+                $tasks->completed = 1;
+                $tasks->save();
+            }
+            return redirect('/');
+        }
+
+    // UPDATES TASK TO COMPLETE
+
     public function markComplete(Request $request)
     {
         //
@@ -77,6 +104,8 @@ class TasksController extends Controller
 
         return redirect('/');
     }
+
+    // UPDATES TASK TO INCOMPLETE
 
     public function markIncomplete(Request $request)
     {
@@ -89,37 +118,6 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
 
     /**
      * Update the specified resource in storage.
@@ -128,6 +126,9 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     // UPDATE THE TASK INFORMATION
+
     public function update(Request $request)
     {
         // $this->validate($request, [
@@ -143,6 +144,8 @@ class TasksController extends Controller
 
     }
 
+    // DELETE TASK
+
     public function delete(Request $request)
     {
 
@@ -150,16 +153,5 @@ class TasksController extends Controller
 
         return redirect('/');
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

@@ -1,5 +1,5 @@
-@extends('layouts.app');
-@include('modals');
+@extends('layouts.app')
+@include('modals')
 
 @section('content')
 <div class="container">
@@ -31,6 +31,7 @@
                                     <th scope="col" class="d-none">Details</th>
                                     <th scope="col" class="d-none">Updated_At</th>
                                     <th scope="col" class="d-none">Task ID</th>
+                                    <th scope="col" class="d-none">Completed?</th>
                                 </thead>
                                 <tbody>
                                 <!-- Foreach loop through each object (containing INCOMPLETE task info) returned from GET request -->
@@ -39,12 +40,19 @@
                                         <th scope="row">{{ $incomplete->task}}</th>
                                         <td>{{ $incomplete->priority }}</td>
                                         <td>{{ \Carbon\Carbon::parse($incomplete->created_at)->diffForHumans() }}</td>
-                                        <td><div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                        </div></td>
+                                        <td>
+                                        <form method="post" action='checkToComplete'>
+                                            {{ csrf_field() }}
+                                            {{ method_field('patch')}}
+                                            <input type="hidden" name= "completed" value=0>
+                                            <input type="hidden" name="id" value={{ $incomplete->id }}>
+                                                <button type="submit" class="btn btn-secondary">Mark Complete</button>
+                                        </form>
+                                        </td>
                                         <td class="d-none">{{ $incomplete->details }}</td>
                                         <td class="d-none">{{ \Carbon\Carbon::parse($incomplete->updated_at)->diffForHumans() }}</td>
                                         <td class="d-none">{{ $incomplete->id }}</td>
+                                        <td class="d-none">{{ $incomplete->completed }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -70,9 +78,15 @@
                                 <th scope="row">{{ $complete->task}}</th>
                                 <td>{{ $complete->priority }}</td>
                                 <td>{{ \Carbon\Carbon::parse($complete->created_at)->diffForHumans() }}</td>
-                                <td><div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=1 id="defaultCheck1" checked>
-                                </div></td>
+                                <td>
+                                    <form method="post" action='checkToComplete'>
+                                        {{ csrf_field() }}
+                                        {{ method_field('patch')}}
+                                        <input type="hidden" name= "completed" value=1>
+                                        <input type="hidden" name="id" value={{ $complete->id }}>
+                                            <button type="submit" class="btn btn-secondary">Mark Incomplete</button>
+                                    </form>
+                                </td>
                                 <td class="d-none">{{ $complete->details }}</td>
                                 <td class="d-none">{{ \Carbon\Carbon::parse($complete->updated_at)->diffForHumans() }}</td>
                                 <td class="d-none">{{ $complete->id }}</td>

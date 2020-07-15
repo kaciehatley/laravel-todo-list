@@ -18,15 +18,21 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+// HTTP Routes For Auth User
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/','TasksController@index')->middleware('auth');
 
-Route::post('create','TasksController@create');
-Route::patch('update', 'TasksController@update')->name('update');
+// API ROUTES
 
+// Create
+Route::post('create','TasksController@create');
+// Update
+Route::patch('update', 'TasksController@update')->name('update');
 Route::patch('markComplete', 'TasksController@markComplete')->name('markComplete');
 Route::patch('markIncomplete', 'TasksController@markIncomplete')->name('markIncomplete');
+Route::patch('checkToComplete', 'TasksController@checkToComplete')->name('checkToComplete');
 
+// Delete
 Route::delete('delete','TasksController@delete');
 
 Route::get('logout', 'Auth\LoginController@logout');

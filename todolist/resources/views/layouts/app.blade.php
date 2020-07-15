@@ -97,6 +97,23 @@
         var compTaskTable = $('#datatable').DataTable();
         var incompTaskTable = $('#dataTable1').DataTable();
         var deletedTable = $('#deletedTable').DataTable();
+        var checkToComplete = $('#checkToComp');
+
+        checkToComplete.on('click', function() {
+            $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')) {
+                $tr = $tr.prev('.parent');
+            }
+
+            var data = incompTaskTable.row($tr).data();
+
+            var id = data[6];
+
+            $('#'+id).val(id);
+
+            // $('#checkCompForm').attr('action', '/checkComplete/', data[6]);
+            console.log(data);
+        })
       
         // When user clicks on row, task data is pulled and rendered in modal
         incompTaskTable.on('click', '.edit1', function() {
